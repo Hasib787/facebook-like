@@ -17,34 +17,36 @@ function App() {
   //   setLikeColor(likeColor ? '' : 'primary');
   // }
 
-  useEffect(() => {
-    const url = `https://jsonplaceholder.typicode.com/users`;
-    fetch(url)
+    useEffect(()=>{
+      const url = `https://jsonplaceholder.typicode.com/users`;
+      fetch(url)
       .then(res => res.json())
       .then(data => setUsers(data))
 
-    //single User
-    fetch(`https://jsonplaceholder.typicode.com/users/1`)
+      //single User
+      fetch(`https://jsonplaceholder.typicode.com/users/1`)
       .then(res => res.json())
       .then(data => setSingleUser(data))
 
-    //randomUser
-    fetch(`https://randomuser.me/api`)
+      //randomUser
+      fetch(`https://randomuser.me/api`)
       .then(res => res.json())
       .then(data => setRandomUser(data.results[0]))
 
-  }, [])
+    },[])
 
   return (
     <div className="App">
+      
+       <AccessAlarmIcon></AccessAlarmIcon>
+       <ThumbUpAltIcon onClick={()=> setLikeColor(likeColor ? '' : 'primary')} color={likeColor}></ThumbUpAltIcon>
 
-      <AccessAlarmIcon></AccessAlarmIcon>
-      <ThumbUpAltIcon onClick={() => setLikeColor(likeColor ? '' : 'primary')} color={likeColor}></ThumbUpAltIcon>
-
-      <h1>Name: {singleUser.name}</h1>
-      <h2>Random name: {randomUser.name?.first}</h2>
-
-      <MealFinder></MealFinder>
+       <h1>Name: {singleUser.name}</h1>
+       <h2>Random name: {randomUser.name?.first}</h2>
+       {
+         users.map(user=> <li>{user.name}</li>)
+       }
+       <MealFinder></MealFinder>
     </div>
   );
 }

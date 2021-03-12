@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const MealFinder = () => {
     const [search, setSearch] = useState('');
     const [findMeal, setFindMeal] = useState([]);
-
+    
     const handleChange = event => {
         console.log(event.target.value);
         setSearch(event.target.value);
