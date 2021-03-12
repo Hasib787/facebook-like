@@ -3,6 +3,7 @@ import './App.css';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import { useEffect, useState } from 'react';
+import MealFinder from './components/MealFinder/MealFinder';
 
 function App() {
   const [likeColor, setLikeColor] = useState('');
@@ -16,35 +17,34 @@ function App() {
   //   setLikeColor(likeColor ? '' : 'primary');
   // }
 
-    useEffect(()=>{
-      const url = `https://jsonplaceholder.typicode.com/users`;
-      fetch(url)
+  useEffect(() => {
+    const url = `https://jsonplaceholder.typicode.com/users`;
+    fetch(url)
       .then(res => res.json())
       .then(data => setUsers(data))
 
-      //single User
-      fetch(`https://jsonplaceholder.typicode.com/users/1`)
+    //single User
+    fetch(`https://jsonplaceholder.typicode.com/users/1`)
       .then(res => res.json())
       .then(data => setSingleUser(data))
 
-      //randomUser
-      fetch(`https://randomuser.me/api`)
+    //randomUser
+    fetch(`https://randomuser.me/api`)
       .then(res => res.json())
       .then(data => setRandomUser(data.results[0]))
 
-    },[])
+  }, [])
 
   return (
-    <div >
-      
-       <AccessAlarmIcon></AccessAlarmIcon>
-       <ThumbUpAltIcon onClick={()=> setLikeColor(likeColor ? '' : 'primary')} color={likeColor}></ThumbUpAltIcon>
+    <div className="App">
 
-       <h1>Name: {singleUser.name}</h1>
-       <h2>Random name: {randomUser.name?.first}</h2>
-       {
-         users.map(user=> <li>{user.name}</li>)
-       }
+      <AccessAlarmIcon></AccessAlarmIcon>
+      <ThumbUpAltIcon onClick={() => setLikeColor(likeColor ? '' : 'primary')} color={likeColor}></ThumbUpAltIcon>
+
+      <h1>Name: {singleUser.name}</h1>
+      <h2>Random name: {randomUser.name?.first}</h2>
+
+      <MealFinder></MealFinder>
     </div>
   );
 }
